@@ -4,6 +4,11 @@
   border: 0;
   box-sizing: border-box;
   font-family: monospace;
+  overflow: none;
+}
+
+body{
+  background-image: linear-gradient(to left top, #07306e, #0d3675, #123c7c, #174283, #1c488a, #1c4787, #1b4584, #1b4481, #163b73, #103265, #0a2957, #05214a);
 }
 
 main{
@@ -13,7 +18,6 @@ main{
   flex-direction: column;
   align-items: center;
   padding: 40px;
-  background-image: linear-gradient(to left top, #07306e, #0d3675, #123c7c, #174283, #1c488a, #1c4787, #1b4584, #1b4481, #163b73, #103265, #0a2957, #05214a);
 }
 
 main header{
@@ -30,7 +34,7 @@ main header h1{
   width: 25%;
   height: 75%;
   min-width: 320px;
-  min-height: 430px;
+  min-height: 380px;
   padding: 1.9em 1em .8em;
   border-radius: 1em;
   display: flex;
@@ -70,8 +74,10 @@ main header h1{
 }
 
 .btn{
-  width: 60px;
-  height: 45px;
+  /* width: 60px; */
+  /* height: 45px; */
+  width: 21%;
+  height: 16%;
   display: flex;
   justify-content: center;
   align-items: center;
