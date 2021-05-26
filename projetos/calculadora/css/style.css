@@ -1,0 +1,98 @@
+*{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-family: monospace;
+}
+
+main{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  background-image: linear-gradient(to left top, #07306e, #0d3675, #123c7c, #174283, #1c488a, #1c4787, #1b4584, #1b4481, #163b73, #103265, #0a2957, #05214a);
+}
+
+main header{
+  margin-bottom: 1.5rem;
+}
+
+main header h1{
+  color: #86a1ca;
+  margin-bottom: .7em;
+}
+
+.container{
+  background-image: linear-gradient(to right bottom, #15000c, #1b1019, #211924, #27232f, #2d2d3a, #2a2f3c, #27303d, #24323d, #192c34, #10252a, #091e20, #001816);
+  width: 25%;
+  height: 75%;
+  min-width: 320px;
+  min-height: 430px;
+  padding: 1.9em 1em .8em;
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: inset 0 0 0.5em rgb(2, 2, 2), 0.2em 0.4em 1em #101c2c;
+}
+
+.display{
+  background-image: linear-gradient(to right bottom, #9c9c9c, #aaaaaa, #b9b8b9, #c8c6c7, #d7d4d5, #d8d5d6, #dad7d8, #dbd8d9, #cfcdce, #c2c1c2, #b6b6b7, #ababab);
+  width: 100%;
+  height: 25%;
+  padding: 0.4em;
+  border-radius: 0.5em;
+  box-shadow: inset 0.3em 0.2em 0.8em rgb(53, 53, 53);
+  margin-bottom: 1.8em;
+}
+
+.display p{
+  width: 100%;
+  background-color:transparent;
+  font-size: 2.5em;
+  font-stretch: condensed;
+  text-align: right;
+  word-break: break-all;
+  color: rgb(114, 114, 114);
+  line-height: .9em;
+}
+
+.buttons{
+  width: 100%;
+  height: 80%;
+  padding: 0.3em 0.2em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.btn{
+  width: 60px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5em;
+  box-shadow: inset 0.1em 0.1em 0.2em #5180c7, 0.1em 0.1em 0.2em #0c1829;
+  background-image: linear-gradient(to left top, #002357, #022860, #052d69, #083372, #0b387b, #0f3d83, #13428c, #164794, #1b4e9e, #1f54a7, #235bb1, #2762bb);
+  color: #aac9f8;
+  font-size: 1.6em;
+  cursor: pointer;
+}
+
+.btn:nth-child(1), .btn:nth-child(2){
+  width: 133px;
+  height: 40px;
+}
+
+.btn:hover{
+  transform: scale(1.02);
+}
+
+.btn:active{
+  transform: scale(.98);
+  box-shadow: inset 0.1em 0.1em 0.2em #131f31, 0.1em 0.1em 0.2em #0c1829;
+}
