@@ -1,0 +1,24 @@
+{
+  "id":"laislonandesson.com.br",
+  "name": "Contato - Lailson Andesson",
+  "short_name": "Contato - Lailson",
+  "theme_color": "#121212",
+  "background_color": "#121212",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "https://lailsonandesson.com.br/",
+  "start_url": "https://lailsonandesson.com.br",
+  "icons": [
+    {
+      "src": "./img/favicon/logo-iniciar-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./img/favicon/logo-iniciar-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "description": "Tudo bem? Espero que sim. Meu nome é Lailson Andesson, esse é meu cartão de visitas digital, aqui você encontra meios de entrar em contato comigo. Aguardo seu contato!"
+}

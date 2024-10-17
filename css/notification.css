@@ -1,0 +1,20 @@
+.notification{
+  position: absolute;
+  width: 100%;
+  top: 0;
+  padding: .2rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  z-index: 99999;
+}
+
+.online{
+  background-color: rgb(134, 174, 134);
+  color:  rgb(31, 102, 31);
+}
+
+.offline{
+  background-color: rgb(191, 133, 133);
+  color:  rgb(102, 31, 31);
+}
