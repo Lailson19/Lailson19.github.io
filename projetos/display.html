@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Digital - Açougue</title>
+    <style>
+        /* --- CSS RESET & BASE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body, html {
+            height: 100%;
+            width: 100%;
+            overflow: hidden; /* Garante que não haverá scrolls */
+            background-color: #1a1a1a; /* Fundo escuro para destacar as carnes */
+            color: white;
+        }
+
+        /* --- CONTAINER PRINCIPAL DO SLIDE --- */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* --- ESTRUTURA DOS SLIDES --- */
+        .slides-wrapper {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            transition: transform 1s ease-in-out; /* Animação suave de transição */
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: flex-end; /* Posiciona o texto na parte inferior */
+        }
+
+        /* --- IMAGEM DE FUNDO --- */
+        .slide-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Faz a imagem cobrir tudo sem distorcer */
+            z-index: 1;
+        }
+
+        /* Gradiente para garantir leitura do texto sobre a imagem */
+        .slide-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+            z-index: 2;
+        }
+
+        /* --- ÁREA DE TEXTO (NOME E PREÇO) --- */
+        .slide-info {
+            position: relative;
+            z-index: 3;
+            padding: 4% 6%; /* Padding responsivo baseado na tela */
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .product-name {
+            font-size: 5vw; /* Tamanho da fonte responsivo (viewport width) */
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            max-width: 60%;
+        }
+
+        .price-container {
+            text-align: right;
+            background-color: #e74c3c; /* Vermelho vibrante para o preço */
+            padding: 15px 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .price-label {
+            font-size: 1.5vw;
+            display: block;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .price-value {
+            font-size: 6vw;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .price-unit {
+            font-size: 2vw;
+            font-weight: 400;
+        }
+
+        /* --- BARRINHA DE PROGRESSO (OPCIONAL) --- */
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background-color: #f1c40f; /* Amarelo */
+            width: 0%;
+            z-index: 4;
+            transition: width linear;
+        }
+
+        /* --- RESPONSIVIDADE PARA TELAS MENORES (TABLETS/HOSPEDAGEM) --- */
+        @media (max-width: 768px) {
+            .slide-info {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 10%;
+            }
+            .product-name {
+                font-size: 8vw;
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
+            .price-container {
+                width: 100%;
+                text-align: center;
+            }
+            .price-value { font-size: 12vw; }
+            .price-label { font-size: 4vw; }
+            .price-unit { font-size: 5vw; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+        <div class="progress-bar" id="progressBar"></div>
+        
+        <div class="slides-wrapper" id="slidesWrapper"></div>
+    </div>
+
+    <script>
+        // CONFIGURAÇÕES
+        const tempoPorSlide = 8000; // 8 segundos (em milissegundos)
+        
+        // SIMULAÇÃO DA BASE DE DADOS JSON
+        // Num cenário real, isso viria de fetch('http://sua-api/produtos')
+        const dadosProdutos = [
+            {
+                nome: "Picanha Argentina Premium",
+                preco: "89",
+                centavos: "90",
+                unidade: "Kg",
+                imagem: "https://images.unsplash.com/photo-1594041680534-e8c8cdebd659?q=80&w=1920" // URL de exemplo
+            },
+            {
+                nome: "Alcatra com Maminha",
+                preco: "54",
+                centavos: "50",
+                unidade: "Kg",
+                imagem: "https://plus.unsplash.com/premium_photo-1723921294950-8d993a9330f8?q=80&w=1132&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" // URL de exemplo
+            },
+            {
+                nome: "Costela Janela Bovina",
+                preco: "39",
+                centavos: "90",
+                unidade: "Kg",
+                imagem: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1920" // URL de exemplo
+            },
+            {
+                nome: "Cortes Suínos Especiais",
+                preco: "28",
+                centavos: "00",
+                unidade: "Pct 1Kg",
+                imagem: "https://images.unsplash.com/photo-1624234763734-c9629a2777c1?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" // URL de exemplo
+            }
+        ];
+
+        // VARIÁVEIS DE ESTADO
+        let currentIndex = 0;
+        let totalSlides = 0;
+        let pBarInterval;
+        const wrapper = document.getElementById('slidesWrapper');
+        const progressBar = document.getElementById('progressBar');
+
+        // FUNÇÃO PARA INSERIR OS DADOS NO HTML
+        function renderizarSlides(produtos) {
+            totalSlides = produtos.length;
+            wrapper.innerHTML = ''; // Limpa conteúdo existente
+
+            produtos.forEach(produto => {
+                const slideHTML = `
+                    <div class="slide">
+                        <img src="${produto.imagem}" alt="${produto.nome}" class="slide-image">
+                        <div class="slide-overlay"></div>
+                        <div class="slide-info">
+                            <h1 class="product-name">${produto.nome}</h1>
+                            <div class="price-container">
+                                <span class="price-label">Oferta</span>
+                                <div class="price-value">
+                                    <span class="currency">R$</span>${produto.preco}<span class="price-unit">,${produto.centavos} /${produto.unidade}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                wrapper.innerHTML += slideHTML;
+            });
+        }
+
+        // FUNÇÃO DE LÓGICA DO SLIDE (MOVIMENTAÇÃO)
+        function mostrarSlide(index) {
+            // Se chegou no fim, volta pro primeiro
+            if (index >= totalSlides) {
+                currentIndex = 0;
+            } else if (index < 0) {
+                currentIndex = totalSlides - 1;
+            } else {
+                currentIndex = index;
+            }
+
+            // Calcula o deslocamento e aplica no CSS (transform: translateX)
+            const offset = -currentIndex * 100;
+            wrapper.style.transform = `translateX(${offset}%)`;
+            
+            resetProgressBar();
+        }
+
+        function proximoSlide() {
+            mostrarSlide(currentIndex + 1);
+        }
+
+        // LÓGICA DA BARRA DE PROGRESSO
+        function resetProgressBar() {
+            // Reinicia visualmente
+            progressBar.style.transition = 'none';
+            progressBar.style.width = '0%';
+            
+            // Força o navegador a reconhecer a mudança de estilo antes de aplicar a transição
+            void progressBar.offsetWidth; 
+
+            // Aplica a transição para preencher até 100% no tempo definido
+            progressBar.style.transition = `width ${tempoPorSlide}ms linear`;
+            progressBar.style.width = '100%';
+        }
+
+        // FUNÇÃO PRINCIPAL DE INICIALIZAÇÃO
+        async function inicializarCatalogo() {
+            // Passo 1: Carregar Dados (Aqui você trocaria pela chamada de API real)
+            // const dadosApi = await fetch('http://sua-api/produtos').then(r => r.json());
+            const dados = dadosProdutos; // Usando os dados mocado acima
+
+            if(dados && dados.length > 0) {
+                // Passo 2: Renderizar o HTML
+                renderizarSlides(dados);
+
+                // Passo 3: Iniciar o loop
+                mostrarSlide(0); // Mostra o primeiro
+                setInterval(proximoSlide, tempoPorSlide); // Define o intervalo de troca
+            } else {
+                wrapper.innerHTML = '<div style="padding:50px;">Erro ao carregar produtos ou catálogo vazio.</div>';
+            }
+        }
+
+        // Inicia tudo quando a página carrega
+        window.onload = inicializarCatalogo;
+
+    </script>
+</body>
+</html>
