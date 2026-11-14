@@ -1,7 +1,7 @@
 {
-  "id":"laislonandesson.com.br",
-  "name": "Contato - Lailson Andesson",
-  "short_name": "Contato - Lailson",
+  "id":"lailsonandesson.com.br",
+  "name": "Lailson Andesson - Cartão de Visitas Digital",
+  "short_name": "Lailson Andesson",
   "theme_color": "#121212",
   "background_color": "#121212",
   "display": "standalone",
@@ -20,5 +20,5 @@
       "type": "image/png"
     }
   ],
-  "description": "Tudo bem? Espero que sim. Meu nome é Lailson Andesson, esse é meu cartão de visitas digital, aqui você encontra meios de entrar em contato comigo. Aguardo seu contato!"
+  "description": ""
 }
